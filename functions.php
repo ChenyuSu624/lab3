@@ -60,7 +60,7 @@ class Player {
 
 	function extraDraw() {
 		//returns true if done drawing
-		if ($this->sum < 30 || $this->sum < 42 && rand(-2, 10) < (42 - $this->sum)) {
+		if ($this->sum < 30 || $this->sum < 42 && rand(-4, 10) < (42 - $this->sum)) {
 			$this->draw();
 			return false;
 		}
@@ -109,13 +109,20 @@ function demo() {
 	 * TODO: delete before submitting
 	 *
 	 */
-
+	$start = microtime();
 	Player::$players[] = new Player("Aymeric");
 	Player::initDraw();
 	Player::doExtraDraws();
 	foreach (Player::$players as $p) echo "$p\n";
 	echo "\n\nWinner(s):\n";
 	foreach (Player::getWinner() as $p) echo "$p\n";
+	$time = microtime() - $start;
+	session_start();
+	$_SESSION["nExecutions"]++;
+	$_SESSION["timeSum"] += $time;
+	echo "\nExecuted in ${time}ms.\n";
+	$avg = $_SESSION["timeSum"] / $_SESSION["nExecutions"];
+	echo "Average time: ${avg}ms.\n";
 }
 
 demo();
