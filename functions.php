@@ -42,6 +42,15 @@ class Player {
 	public $hand = array();
 	public $sum = 0;
 	var $doneDrawing = false;
+	public $name = "";
+
+	function __construct($name = "") {
+		$this->name = $name;
+	}
+
+	function __toString() {
+		return $this->name . ": " . $this->sum . "pts";
+	}
 
 	function draw() {
 		$c = new Card();
@@ -59,8 +68,8 @@ class Player {
 	}
 
 	static function initDraw() {
-		for ($i = 0; $i < Player::$nPlayers; $i++)
-			Player::$players[] = new Player();
+		for ($i = count(Player::$players); $i < Player::$nPlayers; $i++)
+			Player::$players[] = new Player("Player " . ($i + 1));
 		foreach (Player::$players as $p) {
 			for ($i = 0; $i < 3; $i++)
 				$p->draw();
@@ -79,9 +88,35 @@ class Player {
 			}
 		}
 	}
+
+	static function getWinner() {
+		$w = array();
+		$m = -1;
+		foreach (Player::$players as $p) {
+			if ($p->sum > $m and $p->sum < 43) {
+				$w = array($p);
+				$m = $p->sum;
+			} elseif ($p->sum == $m)
+				$w[] = $p;
+		}
+		return $w;
+	}
 }
 
-Player::initDraw();
-Player::doExtraDraws();
-foreach (Player::$players as $p) echo "sum: $p->sum\n";
+function demo() {
+	/*
+	 * Simple demo of the game loop
+	 * TODO: delete before submitting
+	 *
+	 */
+
+	Player::$players[] = new Player("Aymeric");
+	Player::initDraw();
+	Player::doExtraDraws();
+	foreach (Player::$players as $p) echo "$p\n";
+	echo "\n\nWinner(s):\n";
+	foreach (Player::getWinner() as $p) echo "$p\n";
+}
+
+demo();
 ?>
