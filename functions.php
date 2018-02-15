@@ -29,12 +29,59 @@ class Card {
 
 	static function draw($n=1) {
 		$cards = array();
-		for (; $i > 0; $i--)
+		for (; $n > 0; $n--)
 			$cards[] = new Card();
+		return $cards;
 	}
 }
 
-$c = new Card();
-echo $c->getPath(), PHP_EOL;
+class Player {
+	public static $nPlayers = 4;
+	public static $players = array();
 
+	public $hand = array();
+	public $sum = 0;
+	var $doneDrawing = false;
+
+	function draw() {
+		$c = new Card();
+		$this->sum += $c->val;
+		$hand[] = $c;
+	}
+
+	function extraDraw() {
+		//returns true if done drawing
+		if ($this->sum < 30 || $this->sum < 42 && rand(-2, 10) < (42 - $this->sum)) {
+			$this->draw();
+			return false;
+		}
+		return true;
+	}
+
+	static function initDraw() {
+		for ($i = 0; $i < Player::$nPlayers; $i++)
+			Player::$players[] = new Player();
+		foreach (Player::$players as $p) {
+			for ($i = 0; $i < 3; $i++)
+				$p->draw();
+		}
+	}
+
+	static function doExtraDraws() {
+		$stillDrawing = Player::$nPlayers;
+		while ($stillDrawing > 0) {
+			for ($i = 0; $i < count(Player::$players); $i++) {
+				$p = Player::$players[$i];
+				if ($p->doneDrawing)
+					continue;
+				$p->doneDrawing = $p->extraDraw();
+				if ($p->doneDrawing) $stillDrawing--;
+			}
+		}
+	}
+}
+
+Player::initDraw();
+Player::doExtraDraws();
+foreach (Player::$players as $p) echo "sum: $p->sum\n";
 ?>
