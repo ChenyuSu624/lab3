@@ -113,17 +113,20 @@ function demo() {
 	Player::$players[] = new Player("Aymeric");
 	Player::initDraw();
 	Player::doExtraDraws();
-	foreach (Player::$players as $p) echo "$p\n";
-	echo "\n\nWinner(s):\n";
-	foreach (Player::getWinner() as $p) echo "$p\n";
+	echo "<div id='playerUI'>";//Cody - start of the playerUI
+	foreach (Player::$players as $p) echo "<div id='player'>$p\n</div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
+	echo "</div>";//Cody - end of the playerUI
+	echo "\n\nWinner(s):\n <br/>";
+	foreach (Player::getWinner() as $p) echo "$p\n<br/>";
 	$time = microtime() - $start;
 	session_start();
 	$_SESSION["nExecutions"]++;
 	$_SESSION["timeSum"] += $time;
-	echo "\nExecuted in ${time}ms.\n";
+	echo "<div id='results'>Played " .$_SESSION["nExecutions"] . " times <br/>";//Cody - start of results
+	echo "\nExecuted in ${time}ms.\n<br/>";
 	$avg = $_SESSION["timeSum"] / $_SESSION["nExecutions"];
-	echo "Average time: ${avg}ms.\n";
+	echo "Average time: ${avg}ms.\n</div>";//Cody - end of results
 }
 
-demo();
+//demo();
 ?>
