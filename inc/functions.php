@@ -116,8 +116,12 @@ function demo() {
 	echo "<div id='playerUI'>";//Cody - start of the playerUI
 	foreach (Player::$players as $p) echo "<div id='player'>$p\n</div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
 	echo "</div>";//Cody - end of the playerUI
+	echo "<br>";
+	echo "<div id='winner'>";
 	echo "\n\nWinner(s):\n <br/>";
 	foreach (Player::getWinner() as $p) echo "$p\n<br/>";
+	echo "</div>";
+	echo "<br>";
 	$time = microtime() - $start;
 	session_start();
 	$_SESSION["nExecutions"]++;
@@ -126,6 +130,7 @@ function demo() {
 	echo "\nExecuted in ${time}ms.\n<br/>";
 	$avg = $_SESSION["timeSum"] / $_SESSION["nExecutions"];
 	echo "Average time: ${avg}ms.\n</div>";//Cody - end of results
+	echo "<br>";
 }
 
 //demo();
