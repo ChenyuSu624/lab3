@@ -39,7 +39,7 @@ class Player {
 	public static $nPlayers = 4;
 	public static $players = array();
 
-	public static $hand = array(); //Cody - Changed to static to allow access when printing player hands
+	public $hand = array(); //Cody - Changed to static to allow access when printing player hands
 	
 	public $sum = 0;
 	var $doneDrawing = false;
@@ -56,7 +56,7 @@ class Player {
 	function draw() {
 		$c = new Card();
 		$this->sum += $c->val;
-		$hand[] = $c;
+		$this->hand[] = $c;
 	}
 
 	function extraDraw() {
@@ -119,10 +119,10 @@ function demo() {
 		echo "<div id='player'>" . $p;
 		echo "<br/><img src='img/player".$i.".jpg' />";
 		$i++;
-		// foreach(Player::$hand as $c){ //Cody - intended to print the images of each card drawn by the current player
-		// 	$cardImg = $c->getPath();
-		// 	echo "<img src='$cardImg'/>";
-		// }
+		foreach($p->hand as $c){ //Cody - intended to print the images of each card drawn by the current player
+			$cardImg = $c->getPath();
+			echo "<img src='$cardImg'/>";
+		}
 		echo "\n</div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
 	}
 	echo "</div>";//Cody - end of the playerUI
