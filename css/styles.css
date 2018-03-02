@@ -27,7 +27,7 @@ hr {
 #playerUI {
     border-color: white;
     border-style: dotted;
-    width: 700px;
+    width: 1000px;
     padding: 5px;
     border-radius: 20px;
     font-size: 2em;
@@ -72,3 +72,7 @@ input[type=submit]:hover {
     font-size: 2.2em;
 }
 /*End of Devin's CSS*/
+
+#cardUI{
+    float: right;
+}

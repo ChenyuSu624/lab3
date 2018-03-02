@@ -111,6 +111,9 @@ function demo() {
 	 */
 	$start = microtime();
 	Player::$players[] = new Player("Aymeric");
+	Player::$players[] = new Player("Chenyu");
+	Player::$players[] = new Player("Cody");
+	Player::$players[] = new Player("Devin");
 	Player::initDraw();
 	Player::doExtraDraws();
 	echo "<div id='playerUI'>";//Cody - start of the playerUI
@@ -119,11 +122,12 @@ function demo() {
 		echo "<div id='player'>" . $p;
 		echo "<br/><img src='img/player".$i.".jpg' />";
 		$i++;
+		echo "<div id='cardUI'>";
 		foreach($p->hand as $c){ //Cody - intended to print the images of each card drawn by the current player
 			$cardImg = $c->getPath();
 			echo "<img src='$cardImg'/>";
 		}
-		echo "\n</div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
+		echo "\n</div></div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
 	}
 	echo "</div>";//Cody - end of the playerUI
 	echo "<br>";
