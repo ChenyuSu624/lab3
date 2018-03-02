@@ -18,9 +18,12 @@ include "inc/functions.php";
             Players' pictures and corresponding names are displayed RANDOMLY.
             The winner gets the SUM of ALL the points (currently it's just what they earned).
         -->
-        <?php
-            demo();
-        ?>
+        <div id="gameUI">
+            <?php
+              demo();
+            ?>
+        </div>
+        
         <form>
             <input type="submit" value="Play Again!"/>
         </form>

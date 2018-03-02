@@ -39,7 +39,8 @@ class Player {
 	public static $nPlayers = 4;
 	public static $players = array();
 
-	public $hand = array();
+	public static $hand = array(); //Cody - Changed to static to allow access when printing player hands
+	
 	public $sum = 0;
 	var $doneDrawing = false;
 	public $name = "";
@@ -107,14 +108,23 @@ function demo() {
 	/*
 	 * Simple demo of the game loop
 	 * TODO: delete before submitting
-	 *
 	 */
 	$start = microtime();
 	Player::$players[] = new Player("Aymeric");
 	Player::initDraw();
 	Player::doExtraDraws();
 	echo "<div id='playerUI'>";//Cody - start of the playerUI
-	foreach (Player::$players as $p) echo "<div id='player'>$p\n</div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
+	$i = 1;
+	foreach (Player::$players as $p){
+		echo "<div id='player'>" . $p;
+		echo "<br/><img src='img/player".$i.".jpg' />";
+		$i++;
+		// foreach(Player::$hand as $c){ //Cody - intended to print the images of each card drawn by the current player
+		// 	$cardImg = $c->getPath();
+		// 	echo "<img src='$cardImg'/>";
+		// }
+		echo "\n</div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
+	}
 	echo "</div>";//Cody - end of the playerUI
 	echo "<br>";
 	echo "<div id='winner'>";
