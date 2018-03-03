@@ -56,6 +56,15 @@ hr {
     text-align: center;
     margin: 0 auto;
 }
+#gap  /*chenyu -- add boarders between players*/
+{
+    width: 100%;
+    border-color: white;
+    background-color: gray;
+    border-style: dotted;
+    border-radius: 20px;
+    height: 1px;
+}
 strong {
     color : grey;
 }

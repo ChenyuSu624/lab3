@@ -19,6 +19,7 @@ include "inc/functions.php";
             The winner gets the SUM of ALL the points (currently it's just what they earned).
         -->
         <div id="gameUI">
+            
             <?php
               demo();
             ?>
