@@ -43,6 +43,7 @@ hr {
     border-radius: 20px;
     font-size: 1.3em;
     color: White;
+    vertical-align: middle;
     text-align: center;
     margin: 0 auto;
 }
@@ -53,6 +54,7 @@ hr {
     border-radius: 20px;
     font-size: 1.3em;
     color: White;
+    vertical-align: middle;
     text-align: center;
     margin: 0 auto;
 }

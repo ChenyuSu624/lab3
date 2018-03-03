@@ -119,21 +119,22 @@ function demo() {
 	Player::doExtraDraws();
 	
 	echo "<div id='playerUI'>";//Cody - start of the playerUI
+	
 	$i = rand(1,4);				//chenyu- get random images for players;
 	echo '<hr id = "gap" >';
-	$Color = "gold";
+	$Color = "gold"; // just avoid all the letters have white color
+	
 	foreach (Player::$players as $p){
 		echo "<div id='player'>";
-		echo '<div style="Color:'.$Color.'">'. $p.'</div>';//chenyu - change the color of names;
+		echo '<div style="Color:'.$Color.'">'. $p.'</div>';   //chenyu - change the color of names;
 		
-		$total += $p->sum;  // chenyu -  get the total points of four players.
+		$total += $p->sum;  // chenyu -  get the sum points of four players.
 		
 		if($i >4){
 			$i = $i-4;		// chenyu - make sure every player has an image	
 		}
 		echo "<img src='img/player".$i.".jpg' />";
 		$i++;
-		
 		
 		echo "<div id='cardUI'>";
 		foreach($p->hand as $c){ //Cody - intended to print the images of each card drawn by the current player
@@ -142,20 +143,20 @@ function demo() {
 		}
 		echo "\n</div>";
 		echo '<hr id = "gap">';		//chenyu- create dividing lines between players.
-		echo "</div>";//Cody - added <div id='player'> (insert info here) </div> for each player
+		echo "</div>";            //Cody - added <div id='player'> (insert info here) </div> for each player
 		
 	}
-	echo "</div>";//Cody - end of the playerUI
-	echo "<br>";
-
+	echo "</div><br>";//Cody - end of the playerUI
 	echo "<div id='winner'>";
 	echo "\n\nWinner(s):\n <br/>";
+	
 	foreach (Player::getWinner() as $p) $winPoint += $p->sum;	//chenyu - get the total points from winner(s) function
 	echo "$p\n<br/>";
 	$winPoint = $total-$winPoint;								// chenyu - use total points - winner points
-	echo "Winner wins $winPoint Points ! \n<br/>";				 //chenyu - get the points that winner wins.
-	echo "</div>";
-	echo "<br>";
+	echo "Total win(s) $winPoint Points ! \n<br/>";				 //chenyu - get the points that winner wins.
+	echo "</div><br>";
+	
+	
 	$time = microtime() - $start;
 	session_start();
 	$_SESSION["nExecutions"]++;
