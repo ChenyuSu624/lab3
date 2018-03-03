@@ -44,6 +44,7 @@ class Player {
 	public $sum = 0;
 	var $doneDrawing = false;
 	public $name = "";
+
 	function __construct($name = "") {
 		$this->name = $name;
 	}
@@ -54,7 +55,7 @@ class Player {
 
 	function draw() {
 		$c = new Card();
-		$this->sum += $c->val+1; // Devin - Fixed correct card sums
+		$this->sum += $c->val;
 		$this->hand[] = $c;
 	}
 
@@ -95,7 +96,6 @@ class Player {
 		foreach (Player::$players as $p) {
 			if ($p->sum > $m and $p->sum < 43) {
 				$w = array($p);
-				$winner = array($p);
 				$m = $p->sum;
 			} elseif ($p->sum == $m)
 				$w[] = $p;
@@ -104,55 +104,39 @@ class Player {
 	}
 }
 
-function play() {
+function demo() {
+	/*
+	 * Simple demo of the game loop
+	 * TODO: delete before submitting
+	 */
 	$start = microtime();
 	Player::$players[] = new Player("Aymeric");
 	Player::$players[] = new Player("Chenyu");
 	Player::$players[] = new Player("Cody");
 	Player::$players[] = new Player("Devin");
+	shuffle(Player::$players);
 	Player::initDraw();
 	Player::doExtraDraws();
-	
 	echo "<div id='playerUI'>";//Cody - start of the playerUI
-	
-	$i = rand(1,4);				//chenyu- get random images for players;
-	echo '<hr id = "gap" >';
-	$Color = "gold"; // just avoid all the letters have white color
-	
+	$i = 1;
 	foreach (Player::$players as $p){
-		echo "<div id='player'>";
-		echo '<div style="Color:'.$Color.'">'. $p.'</div>';   //chenyu - change the color of names;
-		
-		$total += $p->sum;  // chenyu -  get the sum points of four players.
-		
-		if($i >4){
-			$i = $i-4;		// chenyu - make sure every player has an image	
-		}
-		echo "<img src='img/player".$i.".jpg' />";
+		echo "<div id='player'>" . $p;
+		echo "<br/><img src='img/player".$i.".jpg' />";
 		$i++;
-		
 		echo "<div id='cardUI'>";
 		foreach($p->hand as $c){ //Cody - intended to print the images of each card drawn by the current player
 			$cardImg = $c->getPath();
 			echo "<img src='$cardImg'/>";
 		}
-		echo "\n</div>";
-		echo '<hr id = "gap">';		//chenyu- create dividing lines between players.
-		echo "</div>";            //Cody - added <div id='player'> (insert info here) </div> for each player
-		
+		echo "\n</div></div><br/>";//Cody - added <div id='player'> (insert info here) </div> for each player
 	}
-	echo "</div><br>";//Cody - end of the playerUI
+	echo "</div>";//Cody - end of the playerUI
+	echo "<br>";
 	echo "<div id='winner'>";
 	echo "\n\nWinner(s):\n <br/>";
-	
-	foreach (Player::getWinner() as $p) {
-	$winPoint += $p->sum;	//chenyu - get the total points from winner(s) function
-	echo "$p\n<br/>";
-	} // Devin - Fixed multiple winners displaying
-	$winPoint = $total-$winPoint;								// chenyu - use total points - winner points
-	echo "Total Points: $winPoint \n<br/>";				 //chenyu - get the points that winner wins.
-	echo "</div><br>";
-	
+	foreach (Player::getWinner() as $p) echo "$p\n<br/>";
+	echo "</div>";
+	echo "<br>";
 	$time = microtime() - $start;
 	session_start();
 	$_SESSION["nExecutions"]++;
@@ -163,4 +147,6 @@ function play() {
 	echo "Average time: ${avg}ms.\n</div>";//Cody - end of results
 	echo "<br>";
 }
+
+//demo();
 ?>

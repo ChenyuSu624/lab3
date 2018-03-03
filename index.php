@@ -15,7 +15,7 @@ include "inc/functions.php";
         <h1>SilverJack</h1>
         <div id="gameUI">
             <?php
-              play();
+              demo();
             ?>
         </div>
         <form>
