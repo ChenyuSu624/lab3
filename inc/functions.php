@@ -54,7 +54,7 @@ class Player {
 
 	function draw() {
 		$c = new Card();
-		$this->sum += $c->val;
+		$this->sum += $c->val+1; // Devin - Fixed correct card sums
 		$this->hand[] = $c;
 	}
 
@@ -104,12 +104,7 @@ class Player {
 	}
 }
 
-
-function demo() {
-	/*
-	 * Simple demo of the game loop
-	 * TODO: delete before submitting
-	 */
+function play() {
 	$start = microtime();
 	Player::$players[] = new Player("Aymeric");
 	Player::$players[] = new Player("Chenyu");
@@ -150,12 +145,13 @@ function demo() {
 	echo "<div id='winner'>";
 	echo "\n\nWinner(s):\n <br/>";
 	
-	foreach (Player::getWinner() as $p) $winPoint += $p->sum;	//chenyu - get the total points from winner(s) function
+	foreach (Player::getWinner() as $p) {
+	$winPoint += $p->sum;	//chenyu - get the total points from winner(s) function
 	echo "$p\n<br/>";
+	} // Devin - Fixed multiple winners displaying
 	$winPoint = $total-$winPoint;								// chenyu - use total points - winner points
-	echo "Total win(s) $winPoint Points ! \n<br/>";				 //chenyu - get the points that winner wins.
+	echo "Total Points: $winPoint \n<br/>";				 //chenyu - get the points that winner wins.
 	echo "</div><br>";
-	
 	
 	$time = microtime() - $start;
 	session_start();
@@ -167,6 +163,4 @@ function demo() {
 	echo "Average time: ${avg}ms.\n</div>";//Cody - end of results
 	echo "<br>";
 }
-
-//demo();
 ?>

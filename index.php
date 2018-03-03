@@ -13,18 +13,11 @@ include "inc/functions.php";
     </style>
     <body>
         <h1>SilverJack</h1>
-        <!-- TODO: 
-            Display cards and player images correctly.
-            Players' pictures and corresponding names are displayed RANDOMLY.
-            The winner gets the SUM of ALL the points (currently it's just what they earned).
-        -->
         <div id="gameUI">
-            
             <?php
-              demo();
+              play();
             ?>
         </div>
-        
         <form>
             <input type="submit" value="Play Again!"/>
         </form>
